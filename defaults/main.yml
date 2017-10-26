@@ -1,3 +1,4 @@
 ---
 is_dev: false
 domain_name: dummy.example.com
+webroot_path: /var/www
