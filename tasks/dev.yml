@@ -1,0 +1,12 @@
+---
+- name: Ensure letsencrypt dir exists
+  file:
+    path: /etc/letsencrypt/live
+    state: directory
+
+- name: copy fake cert
+  copy:
+    src: "{{ item }}"
+    dest: /etc/letsencrypt/live/{{ domain_name }}/
+  with_fileglob: fake_cert/*
+...
