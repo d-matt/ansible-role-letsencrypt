@@ -1,0 +1,33 @@
+---
+- name: Ensure git and cron are installed
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - cron
+
+- name: Clone letsencrypt sources
+  git:
+    repo: https://github.com/letsencrypt/letsencrypt
+    dest: /opt/letsencrypt
+    update: no
+    version: master
+
+- name: Install renewal cron
+  cron:
+    user: root
+    name: "Let's Encrypt Renewal"
+    weekday: "1"
+    hour: "2"
+    minute: "30"
+    job: "/opt/letsencrypt/letsencrypt-auto renew >> /var/log/letsencrypt-renew.log"
+
+- name: go get fake cert
+  import_tasks: dev.yml
+  when: is_dev
+
+- name: go get letsencrypt's cert
+  import_tasks: letsencrypt.yml
+  when: not is_dev
+...
