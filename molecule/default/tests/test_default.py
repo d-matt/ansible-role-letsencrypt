@@ -29,6 +29,6 @@ def test_crontab(host):
 
 
 def test_cert_file(host, AnsibleDefaults):
-    domain = AnsibleDefaults['domain_name']
+    domain = AnsibleDefaults['letsencrypt_domain_name']
     f = host.file('/etc/letsencrypt/live/' + domain + '/cert.pem')
     assert f.exists

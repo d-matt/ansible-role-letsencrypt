@@ -13,8 +13,8 @@ Role Variables
 
 Default variables:
 
-    is_dev: false
-    domain_name: dummy.example.com
+    letsencrypt_is_dev: false
+    letsencrypt_domain_name: dummy.example.com
 
 Dependencies
 ------------
@@ -29,7 +29,7 @@ Including an example of how to use your role (for instance, with variables passe
     - hosts: servers
       roles:
          - role: letsencrypt
-           domain_name: "mysite.example.com"
+           letsencrypt_domain_name: "mysite.example.com"
 
 License
 -------

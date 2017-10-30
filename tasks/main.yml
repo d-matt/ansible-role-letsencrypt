@@ -25,9 +25,9 @@
 
 - name: go get fake cert
   import_tasks: dev.yml
-  when: is_dev
+  when: letsencrypt_is_dev
 
 - name: go get letsencrypt's cert
   import_tasks: letsencrypt.yml
-  when: not is_dev
+  when: not letsencrypt_is_dev
 ...
