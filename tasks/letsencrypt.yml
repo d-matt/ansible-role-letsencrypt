@@ -1,7 +1,7 @@
 ---
 - name: Create webroot base directory
   file:
-    path: "{{ webroot_path }}"
+    path: "{{ letsencrypt_webroot_path }}"
     state: directory
 
 - name: Attempt to get the certificate using the webroot authenticator
@@ -12,8 +12,8 @@
         --email {{ admin_email }}
         --standalone
         -a webroot
-        --webroot-path {{ webroot_path }}/
-        -d {{ domain_name }}
+        --webroot-path {{ letsencrypt_webroot_path }}/
+        -d {{ letsencrypt_domain_name }}
   args:
-    creates: /etc/letsencrypt/live/{{ domain_name }}/cert.pem
+    creates: /etc/letsencrypt/live/{{ letsencrypt_domain_name }}/cert.pem
 ...

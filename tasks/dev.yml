@@ -7,6 +7,6 @@
 - name: copy fake cert
   copy:
     src: "{{ item }}"
-    dest: /etc/letsencrypt/live/{{ domain_name }}/
+    dest: /etc/letsencrypt/live/{{ letsencrypt_domain_name }}/
   with_fileglob: fake_cert/*
 ...
