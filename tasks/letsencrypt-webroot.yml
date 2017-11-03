@@ -1,0 +1,18 @@
+---
+- name: Create webroot base directory
+  file:
+    path: "{{ letsencrypt_webroot_path }}"
+    state: directory
+
+- name: Attempt to get the certificate using the webroot authenticator
+  command: >
+    /opt/letsencrypt/letsencrypt-auto certonly
+        --agree-tos
+        --non-interactive
+        --email {{ admin_email }}
+        --webroot
+        --webroot-path {{ letsencrypt_webroot_path }}/
+        -d {{ letsencrypt_domain_name }}
+  args:
+    creates: /etc/letsencrypt/live/{{ letsencrypt_domain_name }}/cert.pem
+...
