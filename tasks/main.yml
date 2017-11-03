@@ -27,7 +27,18 @@
   import_tasks: dev.yml
   when: letsencrypt_is_dev
 
-- name: go get letsencrypt's cert
-  import_tasks: letsencrypt.yml
-  when: not letsencrypt_is_dev
+- name: Detect if a web server is running on port 80
+  wait_for:
+    port: 80
+    timeout: 1
+  ignore_errors: true
+  register: is_80
+
+- name: Go get letsencrypt's cert (without web server)
+  import_tasks: letsencrypt-standalone.yml
+  when: not letsencrypt_is_dev and is_80 | failed
+
+- name: Go get letsencrypt's cert (with web server)
+  import_tasks: letsencrypt-webroot.yml
+  when: not letsencrypt_is_dev and is_80 | succeeded
 ...
