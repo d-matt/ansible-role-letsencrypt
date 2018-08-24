@@ -12,7 +12,7 @@
     repo: https://github.com/letsencrypt/letsencrypt
     dest: /opt/letsencrypt
     update: no
-    version: master
+    version: "{{ letsencrypt_version }}"
 
 - name: Install renewal cron
   cron:

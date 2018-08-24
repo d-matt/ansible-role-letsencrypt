@@ -1,0 +1,5 @@
+[
+  "tests/test_default.py::test_hosts_file[ansible://ubuntu16.06]", 
+  "tests/test_default.py::test_crontab[ansible://ubuntu16.06]", 
+  "tests/test_default.py::test_cert_file[ansible://ubuntu16.06]"
+]
