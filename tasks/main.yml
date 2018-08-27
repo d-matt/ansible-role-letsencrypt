@@ -32,6 +32,7 @@
     port: 80
     timeout: 1
   ignore_errors: true
+  check_mode: no
   register: is_80
 
 - name: Go get letsencrypt's cert (without web server)
