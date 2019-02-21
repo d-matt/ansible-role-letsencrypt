@@ -7,6 +7,7 @@
 - name: Attempt to get the certificate using the webroot authenticator
   command: >
     /opt/letsencrypt/letsencrypt-auto certonly
+        --no-bootstrap
         --agree-tos
         --non-interactive
         --email {{ admin_email }}

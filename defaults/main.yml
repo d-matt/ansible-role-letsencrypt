@@ -1,5 +1,5 @@
 ---
 letsencrypt_is_dev: false
 letsencrypt_domain_name: dummy.example.com
-letsencrypt_webroot_path: /var/www
+letsencrypt_webroot_path: /var/www/html
 letsencrypt_version: v0.26.1
