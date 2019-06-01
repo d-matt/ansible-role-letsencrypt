@@ -9,10 +9,14 @@
 
 - name: Clone letsencrypt sources
   git:
-    repo: https://github.com/letsencrypt/letsencrypt
+    repo: https://github.com/certbot/certbot
     dest: /opt/letsencrypt
     update: no
     version: "{{ letsencrypt_version }}"
+
+- name: Bootstrap letsencrypt
+  command: /opt/letsencrypt/certbot-auto --version --non-interactive
+  changed_when: false
 
 - name: Install renewal cron
   cron:

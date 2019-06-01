@@ -25,7 +25,7 @@ def test_crontab(host):
     f = host.file('/var/spool/cron/crontabs/root')
 
     assert f.exists
-    assert f.contains('30 2 * .*1.*/opt/letsencrypt/letsencrypt-auto renew')
+    assert f.contains('30 2 * .*1.*/opt/letsencrypt/certbot-auto renew')
 
 
 def test_cert_file(host, AnsibleDefaults):

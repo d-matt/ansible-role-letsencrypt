@@ -1,7 +1,7 @@
 ---
 - name: Attempt to get the certificate using the standalone authenticator
   command: >
-    /opt/letsencrypt/letsencrypt-auto certonly
+    /opt/letsencrypt/certbot-auto certonly
         --no-bootstrap
         --agree-tos
         --non-interactive
