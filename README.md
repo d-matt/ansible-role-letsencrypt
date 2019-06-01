@@ -3,6 +3,13 @@ letsencrypt
 
 Request a SSL certificate from [Let's encrypt](https://letsencrypt.org/)
 
+This role detects if a web server is already running (*e.g* nginx) and if so
+uses the webroot method (you have to define then the
+`letsencrypt_webroot_path` var). If not, it uses the standalone method. 
+
+This role can also forge self signed certificates, that can be usefull in dev
+environment without internet access (`letsencrypt_is_dev: true`). 
+
 Requirements
 ------------
 
@@ -15,6 +22,8 @@ Default variables:
 
     letsencrypt_is_dev: false
     letsencrypt_domain_name: dummy.example.com
+    letsencrypt_webroot_path: /var/www/html
+    letsencrypt_version: v0.34.2
 
 Dependencies
 ------------

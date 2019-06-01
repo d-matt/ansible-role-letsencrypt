@@ -1,12 +1,35 @@
 ---
+- name: Install python-openssl
+  package:
+    name: python-openssl
+    state: present 
+
 - name: Ensure letsencrypt dir exists
   file:
-    path: /etc/letsencrypt/live
+    path: /etc/letsencrypt/live/{{ letsencrypt_domain_name }}/
     state: directory
 
-- name: copy fake cert
+- name: Generate the private key
+  openssl_privatekey:
+    path: /etc/letsencrypt/live/{{ letsencrypt_domain_name }}/privkey.pem
+    size: 2048
+
+- name: Generate the CSR
+  openssl_csr:
+    path: /etc/letsencrypt/live/{{ letsencrypt_domain_name }}/csr.pem
+    privatekey_path: /etc/letsencrypt/live/{{ letsencrypt_domain_name }}/privkey.pem
+    common_name: "{{ letsencrypt_domain_name }}"
+
+- name: Generate a Self Signed OpenSSL certificate
+  openssl_certificate:
+    path: /etc/letsencrypt/live/{{ letsencrypt_domain_name }}/fullchain.pem
+    csr_path: /etc/letsencrypt/live/{{ letsencrypt_domain_name }}/csr.pem
+    privatekey_path: /etc/letsencrypt/live/{{ letsencrypt_domain_name }}/privkey.pem
+    provider: selfsigned
+
+- name: Copy chain.pem
   copy:
-    src: "{{ item }}"
-    dest: /etc/letsencrypt/live/{{ letsencrypt_domain_name }}/
-  with_fileglob: fake_cert/*
+    src: /etc/letsencrypt/live/{{ letsencrypt_domain_name }}/fullchain.pem
+    dest: /etc/letsencrypt/live/{{ letsencrypt_domain_name }}/chain.pem
+    remote_src: yes
 ...
