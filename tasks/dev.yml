@@ -2,7 +2,7 @@
 - name: Install python-openssl
   package:
     name: python-openssl
-    state: present 
+    state: present
 
 - name: Ensure letsencrypt dir exists
   file:

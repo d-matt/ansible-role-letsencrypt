@@ -25,7 +25,7 @@
     weekday: "1"
     hour: "2"
     minute: "30"
-    job: "/opt/letsencrypt/letsencrypt-auto renew >> /var/log/letsencrypt-renew.log"
+    job: "/opt/letsencrypt/certbot-auto renew >> /var/log/letsencrypt-renew.log"
 
 - name: go get fake cert
   import_tasks: dev.yml
