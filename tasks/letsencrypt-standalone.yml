@@ -5,7 +5,7 @@
         --no-bootstrap
         --agree-tos
         --non-interactive
-        --email {{ admin_email }}
+        --email {{ letsencrypt_email }}
         --standalone
         -d {{ letsencrypt_domain_name }}
   args:

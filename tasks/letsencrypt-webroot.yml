@@ -10,7 +10,7 @@
         --no-bootstrap
         --agree-tos
         --non-interactive
-        --email {{ admin_email }}
+        --email {{ letsencrypt_email }}
         --webroot
         --webroot-path {{ letsencrypt_webroot_path }}/
         -d {{ letsencrypt_domain_name }}

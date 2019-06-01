@@ -24,6 +24,7 @@ Default variables:
     letsencrypt_domain_name: dummy.example.com
     letsencrypt_webroot_path: /var/www/html
     letsencrypt_version: v0.34.2
+    letsencrypt_email: changeme@somewhere.com
 
 Dependencies
 ------------
@@ -39,6 +40,7 @@ Including an example of how to use your role (for instance, with variables passe
       roles:
          - role: letsencrypt
            letsencrypt_domain_name: "mysite.example.com"
+           letsencrypt_email: "me@awsome.org"
 
 License
 -------
