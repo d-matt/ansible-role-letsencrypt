@@ -4,7 +4,7 @@ import pytest
 import testinfra.utils.ansible_runner
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
+    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('debian')
 
 
 @pytest.fixture(scope="module")
@@ -19,6 +19,15 @@ def test_hosts_file(host):
     assert f.exists
     assert f.user == 'root'
     assert f.group == 'root'
+
+
+def test_certbot_file(host):
+    f = host.file('/opt/letsencrypt/certbot-auto')
+
+    assert f.exists
+    assert f.user == 'root'
+    assert f.group == 'root'
+    assert f.mode == 0o755
 
 
 def test_crontab(host):

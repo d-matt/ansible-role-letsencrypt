@@ -1,22 +1,11 @@
 ---
-- name: Ensure git and cron are installed
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - git
-    - cron
+- name: Install certbot
+  import_tasks: install-default.yml
+  when: ansible_distribution != 'Ubuntu'
 
-- name: Clone letsencrypt sources
-  git:
-    repo: https://github.com/certbot/certbot
-    dest: /opt/letsencrypt
-    update: no
-    version: "{{ letsencrypt_version }}"
-
-- name: Bootstrap letsencrypt
-  command: /opt/letsencrypt/certbot-auto --version --non-interactive
-  changed_when: false
+- name: Install certbot
+  import_tasks: install-ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
 
 - name: Install renewal cron
   cron:
@@ -25,7 +14,7 @@
     weekday: "1"
     hour: "2"
     minute: "30"
-    job: "/opt/letsencrypt/certbot-auto renew >> /var/log/letsencrypt-renew.log"
+    job: "{{ letsencrypt_bin }} renew >> /var/log/letsencrypt-renew.log"
 
 - name: go get fake cert
   import_tasks: dev.yml

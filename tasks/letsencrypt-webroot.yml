@@ -6,7 +6,7 @@
 
 - name: Attempt to get the certificate using the webroot authenticator
   command: >
-    /opt/letsencrypt/certbot-auto certonly
+    {{ letsencrypt_bin }} certonly
         --no-bootstrap
         --agree-tos
         --non-interactive
