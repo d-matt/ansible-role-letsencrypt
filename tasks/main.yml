@@ -30,9 +30,9 @@
 
 - name: Go get letsencrypt's cert (without web server)
   import_tasks: letsencrypt-standalone.yml
-  when: not letsencrypt_is_dev and is_80 | failed
+  when: not letsencrypt_is_dev and is_80 is failed
 
 - name: Go get letsencrypt's cert (with web server)
   import_tasks: letsencrypt-webroot.yml
-  when: not letsencrypt_is_dev and is_80 | succeeded
+  when: not letsencrypt_is_dev and is_80 is succeeded
 ...
